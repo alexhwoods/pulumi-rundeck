@@ -111,23 +111,18 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		PreConfigureCallback: preConfigureCallback,
 		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. Two examples
-			// are below - the single line form is the common case. The multi-line form is
-			// needed only if you wish to override types or other default options.
-			//
-			// "aws_iam_role": {Tok: makeResource(mainMod, "IamRole")}
-			//
-			// "aws_acm_certificate": {
-			// 	Tok: makeResource(mainMod, "Certificate"),
-			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: makeType(mainPkg, "Tags")},
-			// 	},
-			// },
+			"rundeck_acl_policy": {Tok: makeResource(mainMod, "RundeckAclPolicy")},
+			"rundeck_job": {Tok: makeResource(mainMod, "RundeckJob")},
+			"rundeck_project": {Tok: makeResource(mainMod, "RundeckProject")},
+			"rundeck_private_key": {Tok: makeResource(mainMod, "RundeckPrivateKey")},
+			"rundeck_public_key": {Tok: makeResource(mainMod, "RundeckPublicKey")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi function. An example
-			// is below.
-			// "aws_ami": {Tok: makeDataSource(mainMod, "getAmi")},
+			"rundeck_acl_policy": {Tok: makeDataSource(mainMod, "RundeckAclPolicy")},
+			"rundeck_job": {Tok: makeDataSource(mainMod, "RundeckJob")},
+			"rundeck_project": {Tok: makeDataSource(mainMod, "RundeckProject")},
+			"rundeck_private_key": {Tok: makeDataSource(mainMod, "RundeckPrivateKey")},
+			"rundeck_public_key": {Tok: makeDataSource(mainMod, "RundeckPublicKey")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// List any npm dependencies and their versions
