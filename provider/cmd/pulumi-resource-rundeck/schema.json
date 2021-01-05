@@ -1,0 +1,1145 @@
+{
+    "name": "rundeck",
+    "description": "A Pulumi package for creating and managing rundeck cloud resources.",
+    "keywords": [
+        "pulumi",
+        "rundeck"
+    ],
+    "homepage": "https://pulumi.io",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`rundeck` Terraform Provider](https://github.com/terraform-providers/terraform-provider-rundeck).",
+    "repository": "https://github.com/pulumi/pulumi-rundeck",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "config": {
+        "variables": {
+            "apiVersion": {
+                "type": "string",
+                "description": "API Version of the target Rundeck server.\n"
+            },
+            "authToken": {
+                "type": "string",
+                "description": "Auth token to use with the Rundeck API.\n"
+            },
+            "url": {
+                "type": "string",
+                "description": "URL of the root of the target Rundeck server.\n"
+            }
+        },
+        "defaults": [
+            "apiVersion",
+            "authToken",
+            "url"
+        ]
+    },
+    "types": {
+        "rundeck:index/RundeckJobCommand:RundeckJobCommand": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "A longer description of the job, describing the job in the Rundeck UI.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "inlineScript": {
+                    "type": "string",
+                    "description": "gives a whole shell script, inline in the configuration, to execute on the nodes.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "jobs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobCommandJob:RundeckJobCommandJob"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "nodeStepPlugins": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobCommandNodeStepPlugin:RundeckJobCommandNodeStepPlugin"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "scriptFile": {
+                    "type": "string",
+                    "description": "and `script_file_args` together describe a script that is already pre-installed\non the nodes which is to be executed.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "scriptFileArgs": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "shellCommand": {
+                    "type": "string",
+                    "description": "gives a single shell command to execute on the nodes.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "stepPlugins": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobCommandStepPlugin:RundeckJobCommandStepPlugin"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "rundeck:index/RundeckJobCommandJob:RundeckJobCommandJob": {
+            "properties": {
+                "args": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of a group within the project in which to place the job.\nSetting this creates collapsable subcategories within the Rundeck UI's project job index.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the job, used to describe the job in the Rundeck UI.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "nodefilters": {
+                    "$ref": "#/types/rundeck:index/RundeckJobCommandJobNodefilters:RundeckJobCommandJobNodefilters",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "runForEachNode": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ]
+        },
+        "rundeck:index/RundeckJobCommandJobNodefilters:RundeckJobCommandJobNodefilters": {
+            "properties": {
+                "excludeprecedence": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "filter": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "rundeck:index/RundeckJobCommandNodeStepPlugin:RundeckJobCommandNodeStepPlugin": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "Map of arbitrary configuration properties for the selected plugin.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The name of the plugin to use.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "type"
+            ]
+        },
+        "rundeck:index/RundeckJobCommandStepPlugin:RundeckJobCommandStepPlugin": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "Map of arbitrary configuration properties for the selected plugin.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The name of the plugin to use.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "type"
+            ]
+        },
+        "rundeck:index/RundeckJobNotification:RundeckJobNotification": {
+            "properties": {
+                "emails": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobNotificationEmail:RundeckJobNotificationEmail"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "plugins": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobNotificationPlugin:RundeckJobNotificationPlugin"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The name of the plugin to use.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "webhookUrls": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "type"
+            ]
+        },
+        "rundeck:index/RundeckJobNotificationEmail:RundeckJobNotificationEmail": {
+            "properties": {
+                "attachLog": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "recipients": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "subject": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "recipients"
+            ]
+        },
+        "rundeck:index/RundeckJobNotificationPlugin:RundeckJobNotificationPlugin": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "Map of arbitrary configuration properties for the selected plugin.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The name of the plugin to use.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "type"
+            ]
+        },
+        "rundeck:index/RundeckJobOption:RundeckJobOption": {
+            "properties": {
+                "allowMultipleValues": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "defaultValue": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A longer description of the job, describing the job in the Rundeck UI.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "exposedToScripts": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "multiValueDelimiter": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the job, used to describe the job in the Rundeck UI.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "obscureInput": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "requirePredefinedChoice": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "required": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "validationRegex": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "valueChoices": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "valueChoicesUrl": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ]
+        },
+        "rundeck:index/RundeckProjectResourceModelSource:RundeckProjectResourceModelSource": {
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "Map of arbitrary configuration properties for the selected resource model\nplugin.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The name of the resource model plugin to use.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "config",
+                "type"
+            ]
+        }
+    },
+    "provider": {
+        "description": "The provider type for the rundeck package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "inputProperties": {
+            "apiVersion": {
+                "type": "string",
+                "description": "API Version of the target Rundeck server.\n"
+            },
+            "authToken": {
+                "type": "string",
+                "description": "Auth token to use with the Rundeck API.\n"
+            },
+            "url": {
+                "type": "string",
+                "description": "URL of the root of the target Rundeck server.\n"
+            }
+        },
+        "requiredInputs": [
+            "apiVersion",
+            "authToken",
+            "url"
+        ]
+    },
+    "resources": {
+        "rundeck:index/rundeckAclPolicy:RundeckAclPolicy": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the policy. Must end with `.aclpolicy`.\n"
+                },
+                "policy": {
+                    "type": "string",
+                    "description": "The name of the job, used to describe the job in the Rundeck UI.\n"
+                }
+            },
+            "required": [
+                "name",
+                "policy"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the policy. Must end with `.aclpolicy`.\n"
+                },
+                "policy": {
+                    "type": "string",
+                    "description": "The name of the job, used to describe the job in the Rundeck UI.\n"
+                }
+            },
+            "requiredInputs": [
+                "policy"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering RundeckAclPolicy resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the policy. Must end with `.aclpolicy`.\n"
+                    },
+                    "policy": {
+                        "type": "string",
+                        "description": "The name of the job, used to describe the job in the Rundeck UI.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "rundeck:index/rundeckJob:RundeckJob": {
+            "properties": {
+                "allowConcurrentExecutions": {
+                    "type": "boolean",
+                    "description": "Boolean defining whether two or more executions of\nthis job can run concurrently. The default is `false`, meaning that jobs will only run\nsequentially.\n"
+                },
+                "commandOrderingStrategy": {
+                    "type": "string"
+                },
+                "commands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobCommand:RundeckJobCommand"
+                    }
+                },
+                "continueOnError": {
+                    "type": "boolean",
+                    "description": "Boolean defining whether Rundeck will continue to run\nsubsequent steps if any intermediate step fails. Defaults to `false`, meaning that execution\nwill stop and the execution will be considered to have failed.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A longer description of the job, describing the job in the Rundeck UI.\n"
+                },
+                "executionEnabled": {
+                    "type": "boolean",
+                    "description": "If you want job execution to be enabled or disabled. Defaults to `true`.\n"
+                },
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of a group within the project in which to place the job.\nSetting this creates collapsable subcategories within the Rundeck UI's project job index.\n"
+                },
+                "logLevel": {
+                    "type": "string",
+                    "description": "The log level that Rundeck should use for this job. Defaults to \"INFO\".\n"
+                },
+                "maxThreadCount": {
+                    "type": "integer",
+                    "description": "The maximum number of threads to use to execute this job, which\ncontrols on how many nodes the commands can be run simulateneously. Defaults to 1, meaning that\nthe nodes will be visited sequentially.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the job, used to describe the job in the Rundeck UI.\n"
+                },
+                "nodeFilterExcludePrecedence": {
+                    "type": "boolean"
+                },
+                "nodeFilterQuery": {
+                    "type": "string",
+                    "description": "A query string using\n[Rundeck's node filter language](http://rundeck.org/docs/manual/node-filters.html#node-filter-syntax)\nthat defines which subset of the project's nodes will be used to execute this job.\n"
+                },
+                "notifications": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobNotification:RundeckJobNotification"
+                    }
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobOption:RundeckJobOption"
+                    }
+                },
+                "preserveOptionsOrder": {
+                    "type": "boolean"
+                },
+                "projectName": {
+                    "type": "string",
+                    "description": "The name of the project that this job should belong to.\n"
+                },
+                "rankAttribute": {
+                    "type": "string",
+                    "description": "The name of the attribute that will be used to decide in which\norder the nodes will be visited while executing the job across multiple nodes.\n"
+                },
+                "rankOrder": {
+                    "type": "string",
+                    "description": "Keyword deciding which direction the nodes are sorted in terms of\nthe chosen `rank_attribute`. May be either \"ascending\" (the default) or \"descending\".\n"
+                },
+                "schedule": {
+                    "type": "string",
+                    "description": "The jobs schedule in Unix crontab format\n"
+                },
+                "scheduleEnabled": {
+                    "type": "boolean",
+                    "description": "Sets the job schedule to be enabled or disabled. Defaults to `true`.\n"
+                },
+                "successOnEmptyNodeFilter": {
+                    "type": "boolean",
+                    "description": "Boolean determining if an empty node filter yields\na successful result.\n"
+                }
+            },
+            "required": [
+                "commands",
+                "description",
+                "name",
+                "preserveOptionsOrder",
+                "projectName"
+            ],
+            "inputProperties": {
+                "allowConcurrentExecutions": {
+                    "type": "boolean",
+                    "description": "Boolean defining whether two or more executions of\nthis job can run concurrently. The default is `false`, meaning that jobs will only run\nsequentially.\n"
+                },
+                "commandOrderingStrategy": {
+                    "type": "string"
+                },
+                "commands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobCommand:RundeckJobCommand"
+                    }
+                },
+                "continueOnError": {
+                    "type": "boolean",
+                    "description": "Boolean defining whether Rundeck will continue to run\nsubsequent steps if any intermediate step fails. Defaults to `false`, meaning that execution\nwill stop and the execution will be considered to have failed.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A longer description of the job, describing the job in the Rundeck UI.\n"
+                },
+                "executionEnabled": {
+                    "type": "boolean",
+                    "description": "If you want job execution to be enabled or disabled. Defaults to `true`.\n"
+                },
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of a group within the project in which to place the job.\nSetting this creates collapsable subcategories within the Rundeck UI's project job index.\n"
+                },
+                "logLevel": {
+                    "type": "string",
+                    "description": "The log level that Rundeck should use for this job. Defaults to \"INFO\".\n"
+                },
+                "maxThreadCount": {
+                    "type": "integer",
+                    "description": "The maximum number of threads to use to execute this job, which\ncontrols on how many nodes the commands can be run simulateneously. Defaults to 1, meaning that\nthe nodes will be visited sequentially.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the job, used to describe the job in the Rundeck UI.\n"
+                },
+                "nodeFilterExcludePrecedence": {
+                    "type": "boolean"
+                },
+                "nodeFilterQuery": {
+                    "type": "string",
+                    "description": "A query string using\n[Rundeck's node filter language](http://rundeck.org/docs/manual/node-filters.html#node-filter-syntax)\nthat defines which subset of the project's nodes will be used to execute this job.\n"
+                },
+                "notifications": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobNotification:RundeckJobNotification"
+                    }
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckJobOption:RundeckJobOption"
+                    }
+                },
+                "preserveOptionsOrder": {
+                    "type": "boolean"
+                },
+                "projectName": {
+                    "type": "string",
+                    "description": "The name of the project that this job should belong to.\n"
+                },
+                "rankAttribute": {
+                    "type": "string",
+                    "description": "The name of the attribute that will be used to decide in which\norder the nodes will be visited while executing the job across multiple nodes.\n"
+                },
+                "rankOrder": {
+                    "type": "string",
+                    "description": "Keyword deciding which direction the nodes are sorted in terms of\nthe chosen `rank_attribute`. May be either \"ascending\" (the default) or \"descending\".\n"
+                },
+                "schedule": {
+                    "type": "string",
+                    "description": "The jobs schedule in Unix crontab format\n"
+                },
+                "scheduleEnabled": {
+                    "type": "boolean",
+                    "description": "Sets the job schedule to be enabled or disabled. Defaults to `true`.\n"
+                },
+                "successOnEmptyNodeFilter": {
+                    "type": "boolean",
+                    "description": "Boolean determining if an empty node filter yields\na successful result.\n"
+                }
+            },
+            "requiredInputs": [
+                "commands",
+                "description",
+                "projectName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering RundeckJob resources.\n",
+                "properties": {
+                    "allowConcurrentExecutions": {
+                        "type": "boolean",
+                        "description": "Boolean defining whether two or more executions of\nthis job can run concurrently. The default is `false`, meaning that jobs will only run\nsequentially.\n"
+                    },
+                    "commandOrderingStrategy": {
+                        "type": "string"
+                    },
+                    "commands": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/rundeck:index/RundeckJobCommand:RundeckJobCommand"
+                        }
+                    },
+                    "continueOnError": {
+                        "type": "boolean",
+                        "description": "Boolean defining whether Rundeck will continue to run\nsubsequent steps if any intermediate step fails. Defaults to `false`, meaning that execution\nwill stop and the execution will be considered to have failed.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "A longer description of the job, describing the job in the Rundeck UI.\n"
+                    },
+                    "executionEnabled": {
+                        "type": "boolean",
+                        "description": "If you want job execution to be enabled or disabled. Defaults to `true`.\n"
+                    },
+                    "groupName": {
+                        "type": "string",
+                        "description": "The name of a group within the project in which to place the job.\nSetting this creates collapsable subcategories within the Rundeck UI's project job index.\n"
+                    },
+                    "logLevel": {
+                        "type": "string",
+                        "description": "The log level that Rundeck should use for this job. Defaults to \"INFO\".\n"
+                    },
+                    "maxThreadCount": {
+                        "type": "integer",
+                        "description": "The maximum number of threads to use to execute this job, which\ncontrols on how many nodes the commands can be run simulateneously. Defaults to 1, meaning that\nthe nodes will be visited sequentially.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the job, used to describe the job in the Rundeck UI.\n"
+                    },
+                    "nodeFilterExcludePrecedence": {
+                        "type": "boolean"
+                    },
+                    "nodeFilterQuery": {
+                        "type": "string",
+                        "description": "A query string using\n[Rundeck's node filter language](http://rundeck.org/docs/manual/node-filters.html#node-filter-syntax)\nthat defines which subset of the project's nodes will be used to execute this job.\n"
+                    },
+                    "notifications": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/rundeck:index/RundeckJobNotification:RundeckJobNotification"
+                        }
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/rundeck:index/RundeckJobOption:RundeckJobOption"
+                        }
+                    },
+                    "preserveOptionsOrder": {
+                        "type": "boolean"
+                    },
+                    "projectName": {
+                        "type": "string",
+                        "description": "The name of the project that this job should belong to.\n"
+                    },
+                    "rankAttribute": {
+                        "type": "string",
+                        "description": "The name of the attribute that will be used to decide in which\norder the nodes will be visited while executing the job across multiple nodes.\n"
+                    },
+                    "rankOrder": {
+                        "type": "string",
+                        "description": "Keyword deciding which direction the nodes are sorted in terms of\nthe chosen `rank_attribute`. May be either \"ascending\" (the default) or \"descending\".\n"
+                    },
+                    "schedule": {
+                        "type": "string",
+                        "description": "The jobs schedule in Unix crontab format\n"
+                    },
+                    "scheduleEnabled": {
+                        "type": "boolean",
+                        "description": "Sets the job schedule to be enabled or disabled. Defaults to `true`.\n"
+                    },
+                    "successOnEmptyNodeFilter": {
+                        "type": "boolean",
+                        "description": "Boolean determining if an empty node filter yields\na successful result.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "rundeck:index/rundeckPrivateKey:RundeckPrivateKey": {
+            "description": "The private key resource allows SSH private keys to be stored into Rundeck's key store.\nThe key store is where Rundeck keeps credentials that are needed to access the nodes on which\nit runs commands.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as fs from \"fs\";\nimport * as rundeck from \"@pulumi/rundeck\";\n\nconst anvils = new rundeck.RundeckPrivateKey(\"anvils\", {\n    keyMaterial: fs.readFileSync(\"/id_rsa\", \"utf-8\"),\n    path: \"anvils/id_rsa\",\n});\n```\n```python\nimport pulumi\nimport pulumi_rundeck as rundeck\n\nanvils = rundeck.RundeckPrivateKey(\"anvils\",\n    key_material=(lambda path: open(path).read())(\"/id_rsa\"),\n    path=\"anvils/id_rsa\")\n```\n```csharp\nusing System.IO;\nusing Pulumi;\nusing Rundeck = Pulumi.Rundeck;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var anvils = new Rundeck.RundeckPrivateKey(\"anvils\", new Rundeck.RundeckPrivateKeyArgs\n        {\n            KeyMaterial = File.ReadAllText(\"/id_rsa\"),\n            Path = \"anvils/id_rsa\",\n        });\n    }\n\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "keyMaterial": {
+                    "type": "string",
+                    "description": "The private key material to store, serialized in any way that is\naccepted by OpenSSH.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The path within the key store where the key will be stored.\n"
+                }
+            },
+            "required": [
+                "keyMaterial",
+                "path"
+            ],
+            "inputProperties": {
+                "keyMaterial": {
+                    "type": "string",
+                    "description": "The private key material to store, serialized in any way that is\naccepted by OpenSSH.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The path within the key store where the key will be stored.\n"
+                }
+            },
+            "requiredInputs": [
+                "keyMaterial",
+                "path"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering RundeckPrivateKey resources.\n",
+                "properties": {
+                    "keyMaterial": {
+                        "type": "string",
+                        "description": "The private key material to store, serialized in any way that is\naccepted by OpenSSH.\n"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "The path within the key store where the key will be stored.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "rundeck:index/rundeckProject:RundeckProject": {
+            "properties": {
+                "defaultNodeExecutorPlugin": {
+                    "type": "string",
+                    "description": "The name of a plugin to use to run commands on\nnodes within this project. Defaults to `jsch-ssh`, which uses the SSH protocol to access the\nnodes.\n"
+                },
+                "defaultNodeFileCopierPlugin": {
+                    "type": "string",
+                    "description": "The name of a plugin to use to copy files onto\nnodes within this project. Defaults to `jsch-scp`, which uses the \"Secure Copy\" protocol\nto send files over SSH.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the project to be shown in the Rundeck UI\n"
+                },
+                "extraConfig": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "Additional raw configuration parameters to include in the project configuration, with dots replaced with slashes in the\nkey names due to limitations in Terraform's config language.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the project, used both in the UI and to uniquely identify\nthe project. Must therefore be unique across a single Rundeck installation.\n"
+                },
+                "resourceModelSources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckProjectResourceModelSource:RundeckProjectResourceModelSource"
+                    },
+                    "description": "Nested block instructing Rundeck on how to determine the\nset of resources (nodes) for this project. The nested block structure is described below.\n"
+                },
+                "sshAuthenticationType": {
+                    "type": "string",
+                    "description": "When the SSH-based file copier and executor plugins are\nused, the type of SSH authentication to use. Defaults to `privateKey`.\n"
+                },
+                "sshKeyFilePath": {
+                    "type": "string",
+                    "description": "Like `ssh_key_storage_path` except that the key is read from\nthe Rundeck server's local filesystem, rather than from the key store.\n"
+                },
+                "sshKeyStoragePath": {
+                    "type": "string",
+                    "description": "When the SSH-based file copier and executor plugins are\nused, the location within Rundeck's key store where the SSH private key can be found. Private\nkeys can be uploaded to rundeck using the `rundeck.RundeckPrivateKey` resource.\n"
+                },
+                "uiUrl": {
+                    "type": "string",
+                    "description": "The URL of the index page for this project in the Rundeck UI.\n"
+                }
+            },
+            "required": [
+                "name",
+                "resourceModelSources",
+                "uiUrl"
+            ],
+            "inputProperties": {
+                "defaultNodeExecutorPlugin": {
+                    "type": "string",
+                    "description": "The name of a plugin to use to run commands on\nnodes within this project. Defaults to `jsch-ssh`, which uses the SSH protocol to access the\nnodes.\n"
+                },
+                "defaultNodeFileCopierPlugin": {
+                    "type": "string",
+                    "description": "The name of a plugin to use to copy files onto\nnodes within this project. Defaults to `jsch-scp`, which uses the \"Secure Copy\" protocol\nto send files over SSH.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the project to be shown in the Rundeck UI\n"
+                },
+                "extraConfig": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "Additional raw configuration parameters to include in the project configuration, with dots replaced with slashes in the\nkey names due to limitations in Terraform's config language.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the project, used both in the UI and to uniquely identify\nthe project. Must therefore be unique across a single Rundeck installation.\n"
+                },
+                "resourceModelSources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/rundeck:index/RundeckProjectResourceModelSource:RundeckProjectResourceModelSource"
+                    },
+                    "description": "Nested block instructing Rundeck on how to determine the\nset of resources (nodes) for this project. The nested block structure is described below.\n"
+                },
+                "sshAuthenticationType": {
+                    "type": "string",
+                    "description": "When the SSH-based file copier and executor plugins are\nused, the type of SSH authentication to use. Defaults to `privateKey`.\n"
+                },
+                "sshKeyFilePath": {
+                    "type": "string",
+                    "description": "Like `ssh_key_storage_path` except that the key is read from\nthe Rundeck server's local filesystem, rather than from the key store.\n"
+                },
+                "sshKeyStoragePath": {
+                    "type": "string",
+                    "description": "When the SSH-based file copier and executor plugins are\nused, the location within Rundeck's key store where the SSH private key can be found. Private\nkeys can be uploaded to rundeck using the `rundeck.RundeckPrivateKey` resource.\n"
+                }
+            },
+            "requiredInputs": [
+                "resourceModelSources"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering RundeckProject resources.\n",
+                "properties": {
+                    "defaultNodeExecutorPlugin": {
+                        "type": "string",
+                        "description": "The name of a plugin to use to run commands on\nnodes within this project. Defaults to `jsch-ssh`, which uses the SSH protocol to access the\nnodes.\n"
+                    },
+                    "defaultNodeFileCopierPlugin": {
+                        "type": "string",
+                        "description": "The name of a plugin to use to copy files onto\nnodes within this project. Defaults to `jsch-scp`, which uses the \"Secure Copy\" protocol\nto send files over SSH.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the project to be shown in the Rundeck UI\n"
+                    },
+                    "extraConfig": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        },
+                        "description": "Additional raw configuration parameters to include in the project configuration, with dots replaced with slashes in the\nkey names due to limitations in Terraform's config language.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the project, used both in the UI and to uniquely identify\nthe project. Must therefore be unique across a single Rundeck installation.\n"
+                    },
+                    "resourceModelSources": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/rundeck:index/RundeckProjectResourceModelSource:RundeckProjectResourceModelSource"
+                        },
+                        "description": "Nested block instructing Rundeck on how to determine the\nset of resources (nodes) for this project. The nested block structure is described below.\n"
+                    },
+                    "sshAuthenticationType": {
+                        "type": "string",
+                        "description": "When the SSH-based file copier and executor plugins are\nused, the type of SSH authentication to use. Defaults to `privateKey`.\n"
+                    },
+                    "sshKeyFilePath": {
+                        "type": "string",
+                        "description": "Like `ssh_key_storage_path` except that the key is read from\nthe Rundeck server's local filesystem, rather than from the key store.\n"
+                    },
+                    "sshKeyStoragePath": {
+                        "type": "string",
+                        "description": "When the SSH-based file copier and executor plugins are\nused, the location within Rundeck's key store where the SSH private key can be found. Private\nkeys can be uploaded to rundeck using the `rundeck.RundeckPrivateKey` resource.\n"
+                    },
+                    "uiUrl": {
+                        "type": "string",
+                        "description": "The URL of the index page for this project in the Rundeck UI.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "rundeck:index/rundeckPublicKey:RundeckPublicKey": {
+            "description": "The public key resource allows SSH public keys to be stored into Rundeck's key store.\nThe key store is where Rundeck keeps credentials that are needed to access the nodes on which\nit runs commands.\n\nThis resource also allows the retrieval of an existing public key from the store, so that it\nmay be used in the configuration of other resources such as ``aws_key_pair``.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as rundeck from \"@pulumi/rundeck\";\n\nconst anvils = new rundeck.RundeckPublicKey(\"anvils\", {\n    keyMaterial: \"ssh-rsa yada-yada-yada\",\n    path: \"anvils/id_rsa.pub\",\n});\n```\n```python\nimport pulumi\nimport pulumi_rundeck as rundeck\n\nanvils = rundeck.RundeckPublicKey(\"anvils\",\n    key_material=\"ssh-rsa yada-yada-yada\",\n    path=\"anvils/id_rsa.pub\")\n```\n```csharp\nusing Pulumi;\nusing Rundeck = Pulumi.Rundeck;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var anvils = new Rundeck.RundeckPublicKey(\"anvils\", new Rundeck.RundeckPublicKeyArgs\n        {\n            KeyMaterial = \"ssh-rsa yada-yada-yada\",\n            Path = \"anvils/id_rsa.pub\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-rundeck/sdk/go/rundeck\"\n\t\"github.com/pulumi/pulumi/sdk/v2/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := rundeck.NewRundeckPublicKey(ctx, \"anvils\", \u0026rundeck.RundeckPublicKeyArgs{\n\t\t\tKeyMaterial: pulumi.String(\"ssh-rsa yada-yada-yada\"),\n\t\t\tPath:        pulumi.String(\"anvils/id_rsa.pub\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "delete": {
+                    "type": "boolean",
+                    "description": "True if the key should be deleted when the resource is deleted. \nDefaults to true if key_material is provided in the configuration.\n"
+                },
+                "keyMaterial": {
+                    "type": "string",
+                    "description": "The public key string to store, serialized in any way that is accepted\nby OpenSSH. If this is not included, ``key_material`` becomes an attribute that can be used\nto read the already-existing key material in the Rundeck store.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The path within the key store where the key will be stored. By convention\nthis path name normally ends with \".pub\" and otherwise has the same name as the associated\nprivate key.\n"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "The URL at which the key material can be retrieved from the key store by other clients.\n"
+                }
+            },
+            "required": [
+                "delete",
+                "keyMaterial",
+                "path",
+                "url"
+            ],
+            "inputProperties": {
+                "keyMaterial": {
+                    "type": "string",
+                    "description": "The public key string to store, serialized in any way that is accepted\nby OpenSSH. If this is not included, ``key_material`` becomes an attribute that can be used\nto read the already-existing key material in the Rundeck store.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The path within the key store where the key will be stored. By convention\nthis path name normally ends with \".pub\" and otherwise has the same name as the associated\nprivate key.\n"
+                }
+            },
+            "requiredInputs": [
+                "path"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering RundeckPublicKey resources.\n",
+                "properties": {
+                    "delete": {
+                        "type": "boolean",
+                        "description": "True if the key should be deleted when the resource is deleted. \nDefaults to true if key_material is provided in the configuration.\n"
+                    },
+                    "keyMaterial": {
+                        "type": "string",
+                        "description": "The public key string to store, serialized in any way that is accepted\nby OpenSSH. If this is not included, ``key_material`` becomes an attribute that can be used\nto read the already-existing key material in the Rundeck store.\n"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "The path within the key store where the key will be stored. By convention\nthis path name normally ends with \".pub\" and otherwise has the same name as the associated\nprivate key.\n"
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The URL at which the key material can be retrieved from the key store by other clients.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "language": {
+        "csharp": {
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "2.*",
+                "System.Collections.Immutable": "1.6.0"
+            }
+        },
+        "nodejs": {
+            "dependencies": {
+                "@pulumi/pulumi": "^2.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^8.0.25"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing rundeck cloud resources.",
+            "packageName": "",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-rundeck)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-rundeck` repo](https://github.com/pulumi/pulumi-rundeck/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-rundeck` repo](https://github.com/terraform-providers/terraform-provider-rundeck/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-rundeck)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-rundeck` repo](https://github.com/pulumi/pulumi-rundeck/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-rundeck` repo](https://github.com/terraform-providers/terraform-provider-rundeck/issues).",
+            "requires": {
+                "pulumi": "\u003e=2.9.0,\u003c3.0.0"
+            },
+            "usesIOClasses": false
+        }
+    }
+}
