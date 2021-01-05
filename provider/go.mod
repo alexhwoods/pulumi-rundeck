@@ -8,4 +8,5 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk v1.9.1
 	github.com/pulumi/pulumi-terraform-bridge/v2 v2.11.0
 	github.com/pulumi/pulumi/sdk/v2 v2.12.0
+	github.com/terraform-providers/terraform-provider-rundeck v0.4.1-0.20200812215150-911276c7beac // indirect
 )
